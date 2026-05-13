@@ -1,1 +1,5 @@
 @import "tailwindcss";
+
+.btn {
+    @apply bg-gray-700 text-white p-4 rounded-3xl text-2xl;
+}
