@@ -1,5 +1,21 @@
 @import "tailwindcss";
 
 .btn {
-    @apply bg-gray-700 text-white p-4 rounded-3xl text-2xl;
+    @apply bg-gray-700 text-white p-4 rounded-3xl text-2xl cursor-pointer shadow-2xl;
+}
+
+.equals-btn {
+  @apply hover:bg-green-500 transition-colors duration-200 ease-in-out transform hover:scale-105;
+}
+
+.operators-btn {
+    @apply hover:bg-blue-400 transition-colors duration-200 ease-in-out transform hover:scale-105;
+}
+
+.clear-btn {
+    @apply hover:bg-red-600 transition-colors duration-200 ease-in-out transform hover:scale-105;
+}
+
+.number-btn {
+    @apply hover:bg-gray-50 transition-colors duration-200 ease-in-out transform hover:scale-105 hover:text-gray-700;
 }
