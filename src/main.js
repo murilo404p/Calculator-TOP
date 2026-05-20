@@ -1,3 +1,7 @@
+let expressaoAtual = "";
+let operators = document.querySelectorAll(".operators-btn");
+let numbers = document.querySelectorAll(".number-btn");
+
 import './style.css'
 
 function add(a, b) {
@@ -16,15 +20,24 @@ function divide(a, b) {
     return a / b;
 }
 
-let valorAtual = "";
-let valorAnterior;
-let operador = document.querySelectorAll(".operators-btn");
-let numbers = document.querySelectorAll(".number-btn");
 
+
+const updateDisplay = (string) => {
+    document.getElementById("current-display").innerText = string;
+}
 
 numbers.forEach(button => {
     button.addEventListener("click", () => {
-        valorAtual =  valorAtual + button.dataset.value;
-        document.getElementById("current-display").innerText = valorAtual;
+        expressaoAtual =  expressaoAtual + button.dataset.value;
+        updateDisplay(expressaoAtual);
     });
 });
+
+operators.forEach(button => {
+    button.addEventListener("click", () => {
+        expressaoAtual = expressaoAtual + button.dataset.operator;
+        updateDisplay(expressaoAtual);
+    });    
+});
+
+
