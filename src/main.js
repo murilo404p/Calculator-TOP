@@ -3,9 +3,12 @@ import './style.css'
 let expression = "";
 let expressionTemp = "";
 let operatorList = ['+', '-', '÷', 'x'];
+let showingResult = false;
 let operators = document.querySelectorAll(".operators-btn");
 let numbers = document.querySelectorAll(".number-btn");
 let equal = document.getElementById("equalBtn");
+let clearBtn = document.querySelectorAll(".clear-btn");
+
 
 const updateDisplay = (string) => {
     document.getElementById("current-display").innerText = string;
@@ -13,6 +16,10 @@ const updateDisplay = (string) => {
 
 numbers.forEach(button => {
     button.addEventListener("click", () => {
+        if (showingResult === true) {
+            expression = "";
+            showingResult = false;
+        }
         expression =  expression + button.dataset.value;
         updateDisplay(expression);
     });
@@ -21,7 +28,6 @@ numbers.forEach(button => {
 operators.forEach(button => {
     button.addEventListener("click", () => {
         let lastCaracter = expression.at(-1);
-        let firstCaracter = expression.at(0);
         if (operatorList.includes(lastCaracter) || expression == "") {
             return;
         }
@@ -36,5 +42,12 @@ equal.addEventListener("click", () => {
         expressionTemp = expressionTemp.replace(/x/g, '*');
         expressionTemp = expressionTemp.replace(/÷/g, '/');
     }
-    document.getElementById('result').innerText = eval(expressionTemp);
+    try {
+        let result = eval(expressionTemp);
+        document.getElementById("result").innerText = result;
+        showingResult = true;
+    } catch (error) {
+        document.getElementById("result").innerText = "Conta inválida";
+    }
 });
+
