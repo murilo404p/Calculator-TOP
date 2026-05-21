@@ -1,28 +1,11 @@
-let expression = "";
-let expressionTemp = "";
-let operators = document.querySelectorAll(".operators-btn");
-let numbers = document.querySelectorAll(".number-btn");
-let equal = document.getElementById("equalBtn")
-
 import './style.css'
 
-function add(a, b) {
-    return a + b;
-}
-
-function subtract(a, b) {
-    return a - b;
-}
-
-function multiply(a, b) {
-    return a * b;
-}
-
-function divide(a, b) {
-    return a / b;
-}
-
-
+let expression = "";
+let expressionTemp = "";
+let operatorList = ['+', '-', '÷', 'x'];
+let operators = document.querySelectorAll(".operators-btn");
+let numbers = document.querySelectorAll(".number-btn");
+let equal = document.getElementById("equalBtn");
 
 const updateDisplay = (string) => {
     document.getElementById("current-display").innerText = string;
@@ -37,9 +20,14 @@ numbers.forEach(button => {
 
 operators.forEach(button => {
     button.addEventListener("click", () => {
+        let lastCaracter = expression.at(-1);
+        let firstCaracter = expression.at(0);
+        if (operatorList.includes(lastCaracter) || expression == "") {
+            return;
+        }
         expression = expression + button.dataset.operator;
         updateDisplay(expression);
-    });    
+    });   
 });
 
 equal.addEventListener("click", () => {
