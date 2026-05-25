@@ -1,9 +1,12 @@
 import './style.css'
+import { evaluate } from 'mathjs';
 
 let expression = "";
 let expressionTemp = "";
 let operatorList = ['+', '-', '÷', 'x'];
 let showingResult = false;
+let currentDisplay = document.getElementById("current-display");
+let resultDisplay = document.getElementById("result");
 let operators = document.querySelectorAll(".operators-btn");
 let numbers = document.querySelectorAll(".number-btn");
 let equal = document.getElementById("equalBtn");
@@ -11,7 +14,11 @@ let clearBtn = document.querySelectorAll(".clear-btn");
 
 
 const updateDisplay = (string) => {
-    document.getElementById("current-display").innerText = string;
+    currentDisplay.innerText = string;
+}
+
+const updateResult = (string) => {
+    resultDisplay.innerText = string;
 }
 
 numbers.forEach(button => {
@@ -43,11 +50,25 @@ equal.addEventListener("click", () => {
         expressionTemp = expressionTemp.replace(/÷/g, '/');
     }
     try {
-        let result = eval(expressionTemp);
-        document.getElementById("result").innerText = result;
+        let result = evaluate(expressionTemp);
+        resultDisplay.innerText = result;
         showingResult = true;
     } catch (error) {
-        document.getElementById("result").innerText = "Conta inválida";
+        resultDisplay.innerText = "Conta inválida";
+        showingResult = true;
     }
+});
+
+clearBtn.forEach(button => {
+    button.addEventListener("click", () => {
+        if (button.id === 'allClear') {
+            expression = "";
+            updateResult(expression);
+            updateDisplay(expression);
+        } else if (button.id === 'clear')  {
+            expression = expression.slice(0, -1);
+            updateDisplay(expression);
+        }
+    });
 });
 
