@@ -27,6 +27,13 @@ numbers.forEach(button => {
             expression = "";
             showingResult = false;
         }
+        if (button.dataset.value === '.') {
+            let currentNumber = expression.split(/[\+\-\÷x]/).at(-1); // 
+
+            if (currentNumber.includes('.')) {
+                return;
+            }
+        }
         expression =  expression + button.dataset.value;
         updateDisplay(expression);
     });
