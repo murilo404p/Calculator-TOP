@@ -35,11 +35,7 @@ jobs:
       - name: Prepare deploy folder
         run: |
          mkdir deploy
-         cp index.html deploy/
-         mkdir -p deploy/src/js
-         cp src/js/script.js deploy/src/js
          cp -r dist deploy/
-         cp -r public deploy/
 
         #  DEBUG (check artifact for correct linking)
       - name: List deploy folder
@@ -51,7 +47,7 @@ jobs:
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-            path: deploy
+            path: deploy/dist
 
   cd:
     name: CD (Deploy to Pages)
