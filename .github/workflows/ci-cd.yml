@@ -29,7 +29,7 @@ jobs:
         run: npm install
 
       - name: Build CSS
-        run: npm run build:css
+        run: npm run build
 
         # JUST IN CASE
       - name: Prepare deploy folder
